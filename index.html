@@ -35,21 +35,21 @@
       body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           Oxygen, Ubuntu, Cantarell, sans-serif;
-        background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+        background: linear-gradient(-45deg, #0f0f23, #1a1a2e, #16213e, #0f3460);
         background-size: 400% 400%;
         animation: gradient 15s ease infinite;
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 20px;
+        padding: 15px;
       }
 
       .container {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 24px;
-        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+        background: rgba(26, 26, 46, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
         max-width: 1400px;
         width: 100%;
         overflow: hidden;
@@ -61,7 +61,7 @@
         background-size: 200% 200%;
         animation: gradient 3s ease infinite;
         color: white;
-        padding: 40px;
+        padding: 30px 20px;
         text-align: center;
         position: relative;
         overflow: hidden;
@@ -79,47 +79,48 @@
       }
 
       .header h1 {
-        font-size: 3em;
-        margin-bottom: 10px;
+        font-size: clamp(2em, 5vw, 3em);
+        margin-bottom: 8px;
         font-weight: 800;
         position: relative;
         z-index: 1;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
       }
 
       .header p {
-        font-size: 1.1em;
+        font-size: clamp(0.9em, 2vw, 1.1em);
         opacity: 0.9;
         position: relative;
         z-index: 1;
       }
 
       .status {
-        padding: 18px;
+        padding: 16px;
         text-align: center;
         font-weight: 600;
-        font-size: 1.05em;
-        background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
-        background-size: 200% auto;
+        font-size: clamp(0.95em, 2vw, 1.05em);
+        background: rgba(40, 40, 60, 0.8);
+        color: #a0a0c0;
         transition: all 0.3s ease;
         letter-spacing: 0.5px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       }
 
       .status.connected {
-        background: linear-gradient(90deg, #d4edda 0%, #c3e6cb 50%, #d4edda 100%);
-        color: #155724;
+        background: linear-gradient(90deg, rgba(52, 211, 153, 0.2), rgba(16, 185, 129, 0.2));
+        color: #34d399;
         animation: shimmer 3s linear infinite;
       }
 
       .status.matching {
-        background: linear-gradient(90deg, #fff3cd 0%, #ffeeba 50%, #fff3cd 100%);
-        color: #856404;
+        background: linear-gradient(90deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2));
+        color: #fbbf24;
         animation: pulse 1.5s ease-in-out infinite;
       }
 
       .status.matched {
-        background: linear-gradient(90deg, #cce5ff 0%, #b8daff 50%, #cce5ff 100%);
-        color: #004085;
+        background: linear-gradient(90deg, rgba(96, 165, 250, 0.2), rgba(59, 130, 246, 0.2));
+        color: #60a5fa;
         animation: shimmer 2s linear infinite;
       }
 
@@ -130,34 +131,34 @@
 
       .video-section {
         flex: 2;
-        min-width: 650px;
-        padding: 40px;
-        background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1e 100%);
+        min-width: 300px;
+        padding: clamp(20px, 4vw, 40px);
+        background: linear-gradient(180deg, #16213e 0%, #0f0f23 100%);
         position: relative;
       }
 
       .videos {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-        margin-bottom: 30px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: clamp(16px, 3vw, 24px);
+        margin-bottom: clamp(20px, 4vw, 30px);
       }
 
       .video-container {
         position: relative;
         background: #0a0a0a;
-        border-radius: 16px;
+        border-radius: 12px;
         overflow: hidden;
         aspect-ratio: 4/3;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         transition: all 0.3s ease;
-        border: 2px solid transparent;
+        border: 2px solid rgba(102, 126, 234, 0.2);
       }
 
       .video-container:hover {
         transform: translateY(-5px);
         box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-        border-color: rgba(102, 126, 234, 0.5);
+        border-color: rgba(102, 126, 234, 0.6);
       }
 
       video {
@@ -169,35 +170,35 @@
 
       .video-label {
         position: absolute;
-        top: 15px;
-        left: 15px;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+        top: 12px;
+        left: 12px;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
         color: white;
-        padding: 8px 16px;
+        padding: 6px 14px;
         border-radius: 20px;
-        font-size: 0.95em;
+        font-size: clamp(0.85em, 2vw, 0.95em);
         font-weight: 600;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         backdrop-filter: blur(10px);
         letter-spacing: 0.5px;
       }
 
       .controls {
         display: flex;
-        gap: 12px;
+        gap: clamp(8px, 2vw, 12px);
         justify-content: center;
         flex-wrap: wrap;
       }
 
       button {
-        padding: 14px 32px;
+        padding: clamp(10px, 2vw, 14px) clamp(20px, 4vw, 32px);
         border: none;
-        border-radius: 30px;
-        font-size: 1.05em;
+        border-radius: 25px;
+        font-size: clamp(0.9em, 2vw, 1.05em);
         font-weight: 700;
         cursor: pointer;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         position: relative;
         overflow: hidden;
         letter-spacing: 0.5px;
@@ -222,19 +223,19 @@
       }
 
       button:hover:not(:disabled) {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
       }
 
       button:active:not(:disabled) {
-        transform: translateY(-1px) scale(0.98);
+        transform: translateY(0) scale(0.98);
       }
 
       button:disabled {
-        opacity: 0.5;
+        opacity: 0.4;
         cursor: not-allowed;
         transform: none;
-        filter: grayscale(50%);
+        filter: grayscale(70%);
       }
 
       .btn-primary {
@@ -266,29 +267,30 @@
 
       .chat-section {
         flex: 1;
-        min-width: 350px;
+        min-width: 300px;
         display: flex;
         flex-direction: column;
-        background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+        background: rgba(22, 22, 38, 0.9);
       }
 
       .chat-header {
-        padding: 24px;
+        padding: clamp(18px, 3vw, 24px);
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         font-weight: 700;
-        font-size: 1.3em;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        font-size: clamp(1.1em, 2.5vw, 1.3em);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         letter-spacing: 0.5px;
       }
 
       .chat-messages {
         flex: 1;
-        padding: 24px;
+        padding: clamp(16px, 3vw, 24px);
         overflow-y: auto;
         max-height: 550px;
-        min-height: 350px;
+        min-height: 250px;
         scroll-behavior: smooth;
+        background: rgba(15, 15, 35, 0.5);
       }
 
       .chat-messages::-webkit-scrollbar {
@@ -296,7 +298,7 @@
       }
 
       .chat-messages::-webkit-scrollbar-track {
-        background: #f1f1f1;
+        background: rgba(30, 30, 50, 0.5);
         border-radius: 10px;
       }
 
@@ -310,13 +312,13 @@
       }
 
       .message {
-        margin-bottom: 16px;
-        padding: 12px 18px;
-        border-radius: 18px;
+        margin-bottom: 14px;
+        padding: 12px 16px;
+        border-radius: 16px;
         max-width: 85%;
         word-wrap: break-word;
         animation: fadeIn 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         transition: transform 0.2s ease;
       }
 
@@ -333,74 +335,86 @@
       }
 
       .message.received {
-        background: white;
-        color: #333;
+        background: rgba(40, 40, 60, 0.8);
+        color: #e0e0e0;
         border-bottom-left-radius: 4px;
+        border: 1px solid rgba(102, 126, 234, 0.2);
       }
 
       .message-time {
         font-size: 0.75em;
-        opacity: 0.75;
+        opacity: 0.7;
         margin-top: 6px;
         font-weight: 500;
       }
 
       .chat-input {
         display: flex;
-        padding: 24px;
-        gap: 12px;
-        border-top: 2px solid #dee2e6;
-        background: white;
-        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+        padding: clamp(16px, 3vw, 24px);
+        gap: clamp(8px, 2vw, 12px);
+        border-top: 2px solid rgba(102, 126, 234, 0.2);
+        background: rgba(22, 22, 38, 0.95);
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
       }
 
       .chat-input input {
         flex: 1;
-        padding: 14px 20px;
-        border: 2px solid #e0e0e0;
-        border-radius: 30px;
-        font-size: 1em;
+        padding: clamp(12px, 2vw, 14px) clamp(16px, 3vw, 20px);
+        border: 2px solid rgba(102, 126, 234, 0.3);
+        border-radius: 25px;
+        font-size: clamp(0.9em, 2vw, 1em);
         outline: none;
         transition: all 0.3s ease;
-        background: #f8f9fa;
+        background: rgba(30, 30, 50, 0.8);
+        color: #e0e0e0;
+      }
+
+      .chat-input input::placeholder {
+        color: rgba(224, 224, 224, 0.5);
       }
 
       .chat-input input:focus {
         border-color: #667eea;
-        background: white;
-        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        background: rgba(40, 40, 60, 0.9);
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
       }
 
       .chat-input button {
-        padding: 14px 28px;
+        padding: clamp(12px, 2vw, 14px) clamp(20px, 4vw, 28px);
       }
 
       .info {
-        padding: 24px;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        font-size: 0.95em;
-        border-top: 2px solid #dee2e6;
+        padding: clamp(18px, 3vw, 24px);
+        background: rgba(15, 15, 35, 0.9);
+        font-size: clamp(0.85em, 2vw, 0.95em);
+        border-top: 2px solid rgba(102, 126, 234, 0.2);
       }
 
       .info-item {
         margin-bottom: 12px;
         padding: 12px;
-        background: white;
+        background: rgba(30, 30, 50, 0.6);
         border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease;
+        border: 1px solid rgba(102, 126, 234, 0.2);
       }
 
       .info-item:hover {
         transform: translateX(5px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        border-color: rgba(102, 126, 234, 0.4);
       }
 
       .info-item strong {
         display: inline-block;
-        width: 120px;
-        color: #667eea;
+        width: clamp(100px, 20vw, 120px);
+        color: #60a5fa;
         font-weight: 700;
+      }
+
+      .info-item span {
+        color: #a0a0c0;
       }
 
       @media (max-width: 1024px) {
@@ -415,10 +429,6 @@
         .main-content {
           flex-direction: column;
         }
-
-        .header h1 {
-          font-size: 2.2em;
-        }
       }
 
       @media (max-width: 768px) {
@@ -427,24 +437,49 @@
         }
 
         .header {
-          padding: 30px 20px;
-        }
-
-        .header h1 {
-          font-size: 1.8em;
+          padding: 25px 15px;
         }
 
         .video-section {
-          padding: 20px;
+          padding: 20px 15px;
+        }
+
+        .controls {
+          gap: 8px;
         }
 
         .controls button {
-          padding: 12px 24px;
-          font-size: 0.95em;
+          font-size: 0.9em;
         }
 
         .chat-section {
           min-width: 100%;
+        }
+
+        .chat-messages {
+          min-height: 200px;
+          max-height: 400px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header h1 {
+          font-size: 1.8em;
+        }
+
+        .controls {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .controls button {
+          width: 100%;
+          padding: 12px 20px;
+        }
+
+        .video-label {
+          font-size: 0.8em;
+          padding: 5px 12px;
         }
       }
 
