@@ -2,9 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"omiro/middleware"
 	"omiro/redis"
+	"os"
 	"time"
 
 	"github.com/google/uuid"
@@ -27,10 +29,19 @@ var upgrader = websocket.Upgrader{
 }
 
 func main() {
+	redisHost := os.Getenv("REDIS_HOST")
+	if redisHost == "" {
+		redisHost = "localhost"
+	}
+	redisPort := os.Getenv("REDIS_PORT")
+	if redisPort == "" {
+		redisPort = "6379"
+	}
+
 	redis.Init(redis.Config{
-		Host:     "localhost",
-		Port:     "6379",
-		Password: "",
+		Host:     redisHost,
+		Port:     redisPort,
+		Password: os.Getenv("REDIS_PASSWORD"),
 		DB:       0,
 	})
 	redis.RegisterServer(serverID)
@@ -52,7 +63,12 @@ func main() {
 		return c.File("index.html")
 	})
 	go redis.StartMatchmaker()
-	e.Start(":8080")
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	log.Fatalf("error starting server: %v", e.Start(":"+port))
 }
 
 func deliverToClient(userID string, payload json.RawMessage) {

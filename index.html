@@ -12,29 +12,50 @@
       }
 
       @keyframes gradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
       @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
       }
 
       @keyframes shimmer {
-        0% { background-position: -1000px 0; }
-        100% { background-position: 1000px 0; }
+        0% {
+          background-position: -1000px 0;
+        }
+        100% {
+          background-position: 1000px 0;
+        }
       }
 
       body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, sans-serif;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         background: linear-gradient(-45deg, #0f0f23, #1a1a2e, #16213e, #0f3460);
         background-size: 400% 400%;
         animation: gradient 15s ease infinite;
@@ -49,7 +70,8 @@
         background: rgba(26, 26, 46, 0.95);
         backdrop-filter: blur(20px);
         border-radius: 20px;
-        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(255, 255, 255, 0.05);
         max-width: 1400px;
         width: 100%;
         overflow: hidden;
@@ -57,7 +79,12 @@
       }
 
       .header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        background: linear-gradient(
+          135deg,
+          #667eea 0%,
+          #764ba2 50%,
+          #f093fb 100%
+        );
         background-size: 200% 200%;
         animation: gradient 3s ease infinite;
         color: white;
@@ -68,13 +95,17 @@
       }
 
       .header::before {
-        content: '';
+        content: "";
         position: absolute;
         top: -50%;
         left: -50%;
         width: 200%;
         height: 200%;
-        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
         animation: pulse 3s ease-in-out infinite;
       }
 
@@ -84,7 +115,7 @@
         font-weight: 800;
         position: relative;
         z-index: 1;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       }
 
       .header p {
@@ -107,19 +138,31 @@
       }
 
       .status.connected {
-        background: linear-gradient(90deg, rgba(52, 211, 153, 0.2), rgba(16, 185, 129, 0.2));
+        background: linear-gradient(
+          90deg,
+          rgba(52, 211, 153, 0.2),
+          rgba(16, 185, 129, 0.2)
+        );
         color: #34d399;
         animation: shimmer 3s linear infinite;
       }
 
       .status.matching {
-        background: linear-gradient(90deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2));
+        background: linear-gradient(
+          90deg,
+          rgba(251, 191, 36, 0.2),
+          rgba(245, 158, 11, 0.2)
+        );
         color: #fbbf24;
         animation: pulse 1.5s ease-in-out infinite;
       }
 
       .status.matched {
-        background: linear-gradient(90deg, rgba(96, 165, 250, 0.2), rgba(59, 130, 246, 0.2));
+        background: linear-gradient(
+          90deg,
+          rgba(96, 165, 250, 0.2),
+          rgba(59, 130, 246, 0.2)
+        );
         color: #60a5fa;
         animation: shimmer 2s linear infinite;
       }
@@ -168,11 +211,19 @@
         display: block;
       }
 
+      #localVideo {
+        transform: scaleX(-1);
+      }
+
       .video-label {
         position: absolute;
         top: 12px;
         left: 12px;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.95),
+          rgba(118, 75, 162, 0.95)
+        );
         color: white;
         padding: 6px 14px;
         border-radius: 20px;
@@ -205,7 +256,7 @@
       }
 
       button::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
@@ -263,6 +314,30 @@
 
       .btn-success:hover:not(:disabled) {
         background: linear-gradient(135deg, #3891e3 0%, #00d7e3 100%);
+      }
+
+      .btn-warning {
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        color: white;
+        position: relative;
+      }
+
+      .btn-warning:hover:not(:disabled) {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      }
+
+      .coming-soon-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        font-size: 0.65em;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-weight: 700;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        letter-spacing: 0.5px;
       }
 
       .chat-section {
@@ -485,8 +560,12 @@
 
       /* Loading animation */
       @keyframes rotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
       }
 
       .loading {
@@ -551,6 +630,15 @@
               Next Person
             </button>
             <button
+              class="btn-warning"
+              id="reportBtn"
+              onclick="reportUser()"
+              disabled
+            >
+              Report
+              <span class="coming-soon-badge">SOON</span>
+            </button>
+            <button
               class="btn-danger"
               id="disconnectBtn"
               onclick="disconnect()"
@@ -609,11 +697,19 @@
       let clientId = null;
       let partnerId = null;
       let isInitiator = false; // Track if this client should initiate the offer
+      let iceCandidateQueue = []; // Queue for ICE candidates that arrive early
 
       const config = {
         iceServers: [
           { urls: "stun:stun.l.google.com:19302" },
           { urls: "stun:stun1.l.google.com:19302" },
+          { urls: "stun:stun2.l.google.com:19302" },
+          { urls: "stun:stun3.l.google.com:19302" },
+          { urls: "stun:stun4.l.google.com:19302" },
+
+          // OpenRelay TURN (free, for testing ONLY - not for production)
+          // ⚠️ WARNING: This is a public server with shared credentials
+          // Replace with your own TURN server before going to production!
           {
             urls: "turn:openrelay.metered.ca:80",
             username: "openrelayproject",
@@ -631,6 +727,8 @@
           },
         ],
         iceCandidatePoolSize: 10,
+        // Add timeout for faster failover
+        iceTransportPolicy: "all", // Use TURN as fallback
       };
 
       function updateStatus(message, className = "") {
@@ -665,7 +763,11 @@
           console.log("Session token received:", token);
 
           // Create WebSocket URL with token in query parameter
-          const wsUrl = `/ws?token=${encodeURIComponent(token)}`;
+          const protocol =
+            window.location.protocol === "https:" ? "wss:" : "ws:";
+          const wsUrl = `${protocol}//${
+            window.location.host
+          }/ws?token=${encodeURIComponent(token)}`;
 
           ws = new WebSocket(wsUrl);
 
@@ -734,7 +836,11 @@
       }
 
       function nextPerson() {
-        console.log("Looking for next person...");
+        console.log("=== NEXT BUTTON CLICKED ===");
+        console.log("Current partner:", partnerId);
+
+        // Send "next" command FIRST (before clearing UI)
+        send({ op: "next" });
 
         // Close peer connection
         if (peerConnection) {
@@ -742,19 +848,21 @@
           peerConnection = null;
         }
 
+        // Clear ICE candidate queue
+        iceCandidateQueue = [];
+
         // Clear remote video
         const remoteVideo = document.getElementById("remoteVideo");
         remoteVideo.srcObject = null;
 
-        // Send "next" command (NOT disconnect - we stay connected)
-        send({ op: "next" });
-
-        // Clear partner info
+        // Clear partner info IMMEDIATELY
+        const oldPartnerId = partnerId;
         partnerId = null;
         isInitiator = false;
         updateInfo("partnerId", "-");
+        console.log("✅ Partner ID cleared from:", oldPartnerId, "to: -");
 
-        // Clear chat
+        // Clear chat IMMEDIATELY
         clearChat();
 
         // Update status
@@ -762,13 +870,15 @@
 
         // Disable controls temporarily
         document.getElementById("nextBtn").disabled = true;
+        document.getElementById("reportBtn").disabled = true;
         document.getElementById("messageInput").disabled = true;
         document.getElementById("sendBtn").disabled = true;
 
-        // Automatically find next match
+        // Automatically find next match with slightly longer delay for visual feedback
         setTimeout(() => {
+          console.log("Rejoining queue after clearing...");
           findMatch();
-        }, 500);
+        }, 800);
       }
 
       function disconnect() {
@@ -795,6 +905,7 @@
         document.getElementById("startBtn").disabled = true;
         document.getElementById("findBtn").disabled = true;
         document.getElementById("nextBtn").disabled = true;
+        document.getElementById("reportBtn").disabled = true;
         document.getElementById("disconnectBtn").disabled = true;
         document.getElementById("messageInput").disabled = true;
         document.getElementById("sendBtn").disabled = true;
@@ -842,21 +953,29 @@
 
       async function handleMatchFound(msg) {
         console.log("Match found:", msg.partner);
+
+        // Make sure we're starting fresh
+        console.log("Previous partner ID:", partnerId);
+
         partnerId = msg.partner;
         updateInfo("partnerId", partnerId);
         updateStatus("Match found! Connecting...", "matched");
 
+        // Clear chat again to ensure it's fresh for new partner
+        clearChat();
+
         document.getElementById("nextBtn").disabled = false;
+        document.getElementById("reportBtn").disabled = false;
         document.getElementById("messageInput").disabled = false;
         document.getElementById("sendBtn").disabled = false;
 
-        // Determine who initiates based on who should call
-        // The server tells us if we should be the caller
-        isInitiator = msg.should_call === true || clientId.localeCompare(partnerId) < 0;
+        // Determine who initiates based on ONLY what server tells us
+        // The server explicitly tells us if we should be the caller
+        isInitiator = msg.should_call === true;
 
         console.log(`Client ID: ${clientId}`);
         console.log(`Partner ID: ${partnerId}`);
-        console.log(`Comparison result: ${clientId.localeCompare(partnerId)}`);
+        console.log(`Server says should_call: ${msg.should_call}`);
         console.log(`Is initiator: ${isInitiator}`);
 
         if (isInitiator) {
@@ -875,13 +994,15 @@
             },
           });
         } else {
-          // CALLEE: Do NOT create peer connection yet - wait for offer
           console.log("=== I am the CALLEE - waiting for offer ===");
         }
       }
 
       async function createPeerConnection() {
         peerConnection = new RTCPeerConnection(config);
+
+        // Clear any old ICE candidates
+        iceCandidateQueue = [];
 
         // Add local stream tracks
         if (localStream) {
@@ -922,6 +1043,27 @@
         };
       }
 
+      async function processQueuedICECandidates() {
+        if (iceCandidateQueue.length === 0) {
+          return;
+        }
+
+        console.log(
+          `Processing ${iceCandidateQueue.length} queued ICE candidates`
+        );
+
+        for (const candidate of iceCandidateQueue) {
+          try {
+            await peerConnection.addIceCandidate(candidate);
+            console.log("✅ Queued ICE candidate added");
+          } catch (error) {
+            console.error("Error adding queued ICE candidate:", error);
+          }
+        }
+
+        iceCandidateQueue = []; // Clear the queue
+      }
+
       async function handleWebRTCOffer(msg) {
         console.log("=== Received WebRTC offer ===", msg);
 
@@ -948,6 +1090,9 @@
           })
         );
         console.log("Remote offer set, state:", peerConnection.signalingState);
+
+        // Process any queued ICE candidates now that remote description is set
+        await processQueuedICECandidates();
 
         const answer = await peerConnection.createAnswer();
         await peerConnection.setLocalDescription(answer);
@@ -998,19 +1143,38 @@
           "✅ Remote answer set, state:",
           peerConnection.signalingState
         );
+
+        // Process any queued ICE candidates now that remote description is set
+        await processQueuedICECandidates();
       }
 
       async function handleICECandidate(msg) {
         console.log("Received ICE candidate", msg);
-        if (peerConnection && msg.data.candidate) {
-          const candidate = msg.data.candidate;
-          await peerConnection.addIceCandidate(
-            new RTCIceCandidate({
-              candidate: candidate.candidate,
-              sdpMLineIndex: candidate.sdpMLineIndex,
-              sdpMid: candidate.sdpMid,
-            })
-          );
+
+        if (!peerConnection || !msg.data.candidate) {
+          console.log("No peer connection or no candidate data");
+          return;
+        }
+
+        const candidate = new RTCIceCandidate({
+          candidate: msg.data.candidate.candidate,
+          sdpMLineIndex: msg.data.candidate.sdpMLineIndex,
+          sdpMid: msg.data.candidate.sdpMid,
+        });
+
+        // Check if remote description is set
+        if (!peerConnection.remoteDescription) {
+          console.log("Remote description not set yet, queuing ICE candidate");
+          iceCandidateQueue.push(candidate);
+          return;
+        }
+
+        // Add the candidate
+        try {
+          await peerConnection.addIceCandidate(candidate);
+          console.log("✅ ICE candidate added successfully");
+        } catch (error) {
+          console.error("Error adding ICE candidate:", error);
         }
       }
 
@@ -1028,6 +1192,9 @@
           peerConnection = null;
         }
 
+        // Clear ICE candidate queue
+        iceCandidateQueue = [];
+
         // Clear remote video
         document.getElementById("remoteVideo").srcObject = null;
 
@@ -1043,6 +1210,7 @@
         document.getElementById("messageInput").disabled = true;
         document.getElementById("sendBtn").disabled = true;
         document.getElementById("nextBtn").disabled = true;
+        document.getElementById("reportBtn").disabled = true;
 
         // Automatically rejoin the queue
         setTimeout(() => {
@@ -1058,6 +1226,13 @@
         const message = input.value.trim();
 
         if (!message) return;
+
+        // Safety check: Don't send if no partner
+        if (!partnerId) {
+          console.warn("Cannot send message: No partner connected");
+          input.value = "";
+          return;
+        }
 
         send({
           op: "chat",
@@ -1104,6 +1279,13 @@
         const messagesDiv = document.getElementById("chatMessages");
         messagesDiv.innerHTML =
           '<div style="text-align: center; color: #999; padding: 20px;">No messages yet. Find a match to start chatting!</div>';
+        console.log("Chat UI cleared - innerHTML set to placeholder");
+      }
+
+      function reportUser() {
+        alert(
+          "Report feature coming soon! This will allow you to report inappropriate behavior."
+        );
       }
 
       function send(data) {
