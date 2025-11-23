@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"omiro/middleware"
 	"omiro/redis"
+	"os"
 	"time"
 
 	"github.com/google/uuid"
@@ -27,11 +28,22 @@ var upgrader = websocket.Upgrader{
 }
 
 func main() {
+	host := os.Getenv("REDIS_HOST")
+	if host == "" {
+		host = "localhost"
+	}
+	port := os.Getenv("REDIS_PORT")
+	if port == "" {
+		port = "6379"
+	}
+	pass := os.Getenv("REDIS_PASS")
+	if pass == "" {
+		pass = ""
+	}
 	redis.Init(redis.Config{
-		Host:     "localhost",
-		Port:     "6379",
-		Password: "",
-		DB:       0,
+		Host:     host,
+		Port:     port,
+		Password: pass,
 	})
 	redis.RegisterServer(serverID)
 	redis.StartSignalSubscriber(serverID, deliverToClient)
