@@ -480,8 +480,6 @@ ngrok http 8080
 
 #### Using Cloudflare Tunnel (Production)
 
-#### Using Cloudflare Tunnel (Production)
-
 ```bash
 # Start Omiro with Docker
 docker run -d -p 8080:8080 \
