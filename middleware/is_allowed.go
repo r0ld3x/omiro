@@ -20,7 +20,7 @@ func EnsureUpgradeChecks(w http.ResponseWriter, r *http.Request) bool {
 
 	origin := r.Header.Get("Origin")
 	// TODO: Add allowed origins
-	if origin != "http://localhost:8080" && origin != "https://2013e14cb7c2.ngrok-free.app" {
+	if origin != "http://localhost:8080" && origin != "https://omiro.underthedesk.blog" {
 		http.Error(w, "Forbidden origin", http.StatusForbidden)
 		return false
 	}
