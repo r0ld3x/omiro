@@ -12,29 +12,50 @@
       }
 
       @keyframes gradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
       @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
       }
 
       @keyframes shimmer {
-        0% { background-position: -1000px 0; }
-        100% { background-position: 1000px 0; }
+        0% {
+          background-position: -1000px 0;
+        }
+        100% {
+          background-position: 1000px 0;
+        }
       }
 
       body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, sans-serif;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         background: linear-gradient(-45deg, #0f0f23, #1a1a2e, #16213e, #0f3460);
         background-size: 400% 400%;
         animation: gradient 15s ease infinite;
@@ -49,7 +70,8 @@
         background: rgba(26, 26, 46, 0.95);
         backdrop-filter: blur(20px);
         border-radius: 20px;
-        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(255, 255, 255, 0.05);
         max-width: 1400px;
         width: 100%;
         overflow: hidden;
@@ -57,7 +79,12 @@
       }
 
       .header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        background: linear-gradient(
+          135deg,
+          #667eea 0%,
+          #764ba2 50%,
+          #f093fb 100%
+        );
         background-size: 200% 200%;
         animation: gradient 3s ease infinite;
         color: white;
@@ -68,13 +95,17 @@
       }
 
       .header::before {
-        content: '';
+        content: "";
         position: absolute;
         top: -50%;
         left: -50%;
         width: 200%;
         height: 200%;
-        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
         animation: pulse 3s ease-in-out infinite;
       }
 
@@ -84,7 +115,7 @@
         font-weight: 800;
         position: relative;
         z-index: 1;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       }
 
       .header p {
@@ -107,19 +138,31 @@
       }
 
       .status.connected {
-        background: linear-gradient(90deg, rgba(52, 211, 153, 0.2), rgba(16, 185, 129, 0.2));
+        background: linear-gradient(
+          90deg,
+          rgba(52, 211, 153, 0.2),
+          rgba(16, 185, 129, 0.2)
+        );
         color: #34d399;
         animation: shimmer 3s linear infinite;
       }
 
       .status.matching {
-        background: linear-gradient(90deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2));
+        background: linear-gradient(
+          90deg,
+          rgba(251, 191, 36, 0.2),
+          rgba(245, 158, 11, 0.2)
+        );
         color: #fbbf24;
         animation: pulse 1.5s ease-in-out infinite;
       }
 
       .status.matched {
-        background: linear-gradient(90deg, rgba(96, 165, 250, 0.2), rgba(59, 130, 246, 0.2));
+        background: linear-gradient(
+          90deg,
+          rgba(96, 165, 250, 0.2),
+          rgba(59, 130, 246, 0.2)
+        );
         color: #60a5fa;
         animation: shimmer 2s linear infinite;
       }
@@ -168,11 +211,19 @@
         display: block;
       }
 
+      #localVideo {
+        transform: scaleX(-1);
+      }
+
       .video-label {
         position: absolute;
         top: 12px;
         left: 12px;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.95),
+          rgba(118, 75, 162, 0.95)
+        );
         color: white;
         padding: 6px 14px;
         border-radius: 20px;
@@ -205,7 +256,7 @@
       }
 
       button::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
@@ -485,8 +536,12 @@
 
       /* Loading animation */
       @keyframes rotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
       }
 
       .loading {
@@ -664,7 +719,6 @@
           const token = await getSessionToken();
           console.log("Session token received:", token);
 
-          // Create WebSocket URL with token in query parameter
           const wsUrl = `/ws?token=${encodeURIComponent(token)}`;
 
           ws = new WebSocket(wsUrl);
@@ -736,13 +790,11 @@
       function nextPerson() {
         console.log("Looking for next person...");
 
-        // Close peer connection
         if (peerConnection) {
           peerConnection.close();
           peerConnection = null;
         }
 
-        // Clear remote video
         const remoteVideo = document.getElementById("remoteVideo");
         remoteVideo.srcObject = null;
 
@@ -852,7 +904,8 @@
 
         // Determine who initiates based on who should call
         // The server tells us if we should be the caller
-        isInitiator = msg.should_call === true || clientId.localeCompare(partnerId) < 0;
+        isInitiator =
+          msg.should_call === true || clientId.localeCompare(partnerId) < 0;
 
         console.log(`Client ID: ${clientId}`);
         console.log(`Partner ID: ${partnerId}`);
