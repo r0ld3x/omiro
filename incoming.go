@@ -90,16 +90,13 @@ func handleClientDisconnect(c *Client) {
 func handleNextPartner(c *Client) {
 	log.Println("client looking for next partner:", c.ID)
 
-	clientsMu.Lock()
-	partner := c.Partner
-	if partner != nil {
+	// If client has a partner, notify them and clear relationship
+	if c.Partner != nil {
+		partner := c.Partner
 		c.Partner = nil
 		partner.Partner = nil
-	}
-	clientsMu.Unlock()
 
-	// Now notify the partner (outside of lock to avoid deadlock)
-	if partner != nil {
+		// Notify partner about disconnection
 		msg := []byte(`{"op":"partner_disconnected"}`)
 		select {
 		case partner.Send <- SendMessageType{
@@ -112,7 +109,27 @@ func handleNextPartner(c *Client) {
 		}
 	}
 
+	// Client stays connected, just cleared partner relationship
+	// Frontend will automatically call join_queue after this
 	log.Printf("client %s ready for next match\n", c.ID)
+}
+
+func forwardWebRTC(c *Client, typ string, payload json.RawMessage) {
+	// Payload MUST contain "to": "<partnerID>"
+	var pkt struct {
+		To string `json:"to"`
+	}
+
+	json.Unmarshal(payload, &pkt)
+	if pkt.To == "" {
+		log.Println("missing 'to' field for WebRTC op")
+		return
+	}
+
+	redis.SendToClient(pkt.To, map[string]any{
+		"op":   typ,
+		"data": payload,
+	})
 }
 
 func notifyPartnerLeft(userID string) {

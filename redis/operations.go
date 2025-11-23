@@ -127,110 +127,54 @@ func StartSignalSubscriber(serverID string, handler func(userID string, payload 
  ********************************/
 
 func StartMatchmaker() {
-	log.Println("🎯 Matchmaker started - waiting for users in queue...")
-
 	for {
-		log.Println("📋 Waiting for first user from queue...")
-		res, err := Client.BLPop(Ctx, 0*time.Second, "matchmaking:queue").Result()
-		if err != nil {
-			log.Printf("❌ Error popping first user from queue: %v\n", err)
+		u1, _ := Client.RPop(Ctx, "matchmaking:queue").Result()
+		if u1 == "" {
+			time.Sleep(100 * time.Millisecond)
 			continue
 		}
-		if len(res) < 2 {
-			log.Printf("⚠️ Invalid queue response (length %d)\n", len(res))
-			continue
-		}
-		u1 := res[1]
-		log.Printf("✅ Got first user from queue: %s\n", u1)
 
-		log.Println("📋 Waiting for second user from queue...")
-		res2, err := Client.BLPop(Ctx, 0*time.Second, "matchmaking:queue").Result()
-		if err != nil {
-			log.Printf("❌ Error popping second user from queue: %v (putting %s back)\n", err, u1)
-			// Put user1 back
+		u2, _ := Client.RPop(Ctx, "matchmaking:queue").Result()
+		if u2 == "" {
 			Client.LPush(Ctx, "matchmaking:queue", u1)
+			time.Sleep(100 * time.Millisecond)
 			continue
 		}
-		if len(res2) < 2 {
-			log.Printf("⚠️ Invalid queue response for second user (length %d), putting %s back\n", len(res2), u1)
-			Client.LPush(Ctx, "matchmaking:queue", u1)
-			continue
-		}
-		u2 := res2[1]
-		log.Printf("✅ Got second user from queue: %s\n", u2)
 
-		log.Printf("🔗 Creating pair: %s <-> %s\n", u1, u2)
 		go createPair(u1, u2)
 	}
 }
 
 func createPair(u1, u2 string) {
-	log.Printf("🎯 createPair: Starting to create pair for %s and %s\n", u1, u2)
-
 	c1, err1 := GetClient(u1)
 	c2, err2 := GetClient(u2)
 
-	if err1 != nil {
-		log.Printf("❌ createPair: Error getting client %s: %v\n", u1, err1)
-		return
-	}
-	if err2 != nil {
-		log.Printf("❌ createPair: Error getting client %s: %v\n", u2, err2)
-		return
-	}
-	if c1 == nil {
-		log.Printf("❌ createPair: Client %s is nil\n", u1)
-		return
-	}
-	if c2 == nil {
-		log.Printf("❌ createPair: Client %s is nil\n", u2)
+	if err1 != nil || err2 != nil || c1 == nil || c2 == nil {
+		log.Println("pair error: client not found")
 		return
 	}
 
-	log.Printf("✅ createPair: Both clients found, assigning partners\n")
-
+	// assign
 	c1.PartnerID = u2
 	c2.PartnerID = u1
 
-	b1, err := json.Marshal(c1)
-	if err != nil {
-		log.Printf("❌ createPair: Error marshaling client %s: %v\n", u1, err)
-		return
-	}
-	b2, err := json.Marshal(c2)
-	if err != nil {
-		log.Printf("❌ createPair: Error marshaling client %s: %v\n", u2, err)
-		return
-	}
+	// persist
+	b1, _ := json.Marshal(c1)
+	b2, _ := json.Marshal(c2)
 
-	err = Client.Set(Ctx, "client:"+u1, b1, 2*time.Hour).Err()
-	if err != nil {
-		log.Printf("❌ createPair: Error saving client %s to Redis: %v\n", u1, err)
-		return
-	}
-
-	err = Client.Set(Ctx, "client:"+u2, b2, 2*time.Hour).Err()
-	if err != nil {
-		log.Printf("❌ createPair: Error saving client %s to Redis: %v\n", u2, err)
-		return
-	}
-
-	log.Printf("✅ createPair: Saved partner assignments to Redis\n")
+	Client.Set(Ctx, "client:"+u1, b1, 2*time.Hour)
+	Client.Set(Ctx, "client:"+u2, b2, 2*time.Hour)
 
 	// notify both
-	log.Printf("📤 createPair: Notifying %s about match with %s\n", u1, u2)
 	SendToClient(u1, map[string]any{
 		"type":       "match_found",
 		"partner_id": u2,
 	})
 
-	log.Printf("📤 createPair: Notifying %s about match with %s\n", u2, u1)
 	SendToClient(u2, map[string]any{
 		"type":       "match_found",
 		"partner_id": u1,
 	})
-
-	log.Printf("🎉 createPair: Successfully created pair %s <-> %s\n", u1, u2)
 }
 
 /********************************
