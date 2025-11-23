@@ -1,21 +1,46 @@
 version: "3.8"
+
 services:
+  redis:
+    image: redis:7-alpine
+    container_name: omiro-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - omiro-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: omiro-app
+    restart: unless-stopped
     ports:
       - "8080:8080"
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+      - PORT=8080
     depends_on:
-      - redis
-
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
+      redis:
+        condition: service_healthy
+    networks:
+      - omiro-network
+    # Uncomment to use pre-built image from GHCR instead of building locally
+    # image: ghcr.io/r0ld3x/omiro:latest
 
 volumes:
   redis-data:
+    driver: local
+
+networks:
+  omiro-network:
+    driver: bridge
