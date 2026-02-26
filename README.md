@@ -1,4 +1,8 @@
+
+# Project Is Updated and Moved to https://github.com/r0ld3x/flashmeet - flashmeet.tech
+
 # 🎥 Omiro - Real-Time Random Video Chat Platform
+
 
 A modern, high-performance random video chat application built with **Go**, **WebRTC**, and **Redis**. Connect with strangers worldwide through HD video, audio, and text chat with seamless matchmaking.
 
